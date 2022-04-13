@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SomeUsualShop.Models;
 
 namespace SomeUsualShop
 {
@@ -16,6 +17,7 @@ namespace SomeUsualShop
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IRepository, ProductRepository>();
             services.AddMvc(point => point.EnableEndpointRouting = false);
         }
 
@@ -27,7 +29,7 @@ namespace SomeUsualShop
             app.UseStaticFiles();
             
             app.UseStatusCodePages();
-            // controller=Home/action=Index/
+            app.UseRouting();
             app.UseMvcWithDefaultRoute();
         }
     }

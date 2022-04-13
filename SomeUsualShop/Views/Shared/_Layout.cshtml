@@ -16,7 +16,7 @@
     <div class="container d-flex flex-wrap">
       <ul class="nav me-auto">
         <li class="nav-item"><a asp-controller="Home" asp-action="Index" class="nav-link px-2" aria-current="page">Главная</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2">Каталог</a></li>
+        <li class="nav-item"><a asp-controller="Home" asp-action="Catalog" class="nav-link px-2">Каталог</a></li>
         <li class="nav-item"><a asp-controller="Home" asp-action="Reviews" class="nav-link px-2">Отзывы</a></li>
         <li class="nav-item"><a asp-controller="Home" asp-action="About" class="nav-link px-2">О Нас</a></li>
       </ul>
@@ -39,9 +39,6 @@
     <ul class="nav">
       <li class="nav-item"><a class="nav-link link-dark px-2">+7(999)-999-99-99</a></li>
     </ul>
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0">
-      <input type="search" class="form-control" placeholder="Поиск..." aria-label="Search">
-    </form>
   </div>
 </nav>
 

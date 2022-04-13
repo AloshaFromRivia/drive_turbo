@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewBag.Title = "Каталог";
+    Layout = "_Layout";
+}
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+           Фильтры
+         </a>
+      </h5>
+    </div>
+
+    <div id="collapseExample" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0" asp-controller="Home" asp-action="Search" method="get">
+                <input name="searchString" id="searchString" type="search" class="form-control" placeholder="Поиск..." aria-label="Search">
+            </form>
+            <div class="row">
+                <div categories-items class="btn-group my-2"></div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col p-2 m-1">
+            <div class="card mb-3 h-100" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="@item.ImagePath" class="img-fluid rounded-start" alt="..." style="max-height: 150px; max-width: 150px">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Description</p>
+                            <p class="card-text"><small class="text-muted">@item.Price.ToString("C")</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
