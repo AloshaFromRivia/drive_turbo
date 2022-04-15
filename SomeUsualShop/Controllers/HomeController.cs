@@ -1,16 +1,19 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SomeUsualShop.Models;
+using SomeUsualShop.Models.Interfaces;
 
 namespace SomeUsualShop.Controllers
 {
     public class HomeController : Controller
     {
-        private IRepository _repository;
+        private IProductRepository _products;
+        private ICategoryRepository _categories;
         
-        public HomeController(IRepository repository)
+        public HomeController(IProductRepository products,ICategoryRepository categories)
         {
-            _repository = repository;
+            _products = products;
+            _categories = categories;
         }
 
         public IActionResult Index() => View();
@@ -19,11 +22,11 @@ namespace SomeUsualShop.Controllers
         public ViewResult Reviews()=> View();
 
         [Route("/Home/Catalog/")]
-        public IActionResult Catalog() => View(_repository.Products);
+        public IActionResult Catalog() => View(_products.Products);
         [Route("/Home/Catalog/{id}")]
-        public IActionResult Catalog(int id) => View(_repository.Products.Where(p => p.CategoryId == id));
+        public IActionResult Catalog(int id) => View(_products.Products.Where(p => p.CategoryId == id));
         [HttpGet]
         public IActionResult Search(string searchString) => 
-            View("Catalog",_repository.Products.Where(p => p.Name.Contains(searchString)));
+            View("Catalog",_products.Products.Where(p => p.Name.Contains(searchString)));
     }
 }

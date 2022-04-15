@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SomeUsualShop.Models.Interfaces;
 
 namespace SomeUsualShop.Models
 {
-    public class ProductRepository : IRepository
+    public class FakeRepository : IProductRepository,ICategoryRepository
     {
+      
         private List<Product> _products;
         private List<Category> _categories;
 
-        public IEnumerable<Product> Products => _products;
         public IEnumerable<Category> Categories => _categories;
-
-        public ProductRepository()
+        public IEnumerable<Product> Products => _products;
+ 
+        public FakeRepository()
         {
             //Initialisation
             _categories = new List<Category>();
@@ -24,6 +26,11 @@ namespace SomeUsualShop.Models
                 {
                     Id = 0,
                     Name = "Масла"
+                },
+                new Category()
+                {
+                    Id = 5,
+                    Name = "Аксессуары"
                 },
                 new Category()
                 {
@@ -78,16 +85,26 @@ namespace SomeUsualShop.Models
                 }
             });
         }
-        
-        public void Add(Product product)
+
+        public void AddProduct(Product product)
         {
             _products.Add(product);
         }
 
-        public void Remove(long id)
+        public void RemoveProduct(Product product)
         {
-            _products.Remove(_products.First(p => p.Id == id));
+            _products.Remove(product);
         }
 
+  
+        public void AddCategory(Category category)
+        {
+            _categories.Add(category);
+        }
+
+        public void RemoveCategory(Category category)
+        {
+            _categories.Remove(category);
+        }
     }
 }

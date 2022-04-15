@@ -11,17 +11,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using SomeUsualShop.Models;
+using SomeUsualShop.Models.Interfaces;
 
 namespace SomeUsualShop.Infrastructure
 {
     [HtmlTargetElement(Attributes = "categories-items")]
     public class CategoryTagHelper : TagHelper
     {
-        private IRepository _repository;
+        private ICategoryRepository _categories;
 
-        public CategoryTagHelper(IRepository repository)
+        public CategoryTagHelper(ICategoryRepository categories)
         {
-            _repository = repository;
+            _categories = categories;
         }
         
         [ViewContext]
@@ -30,7 +31,7 @@ namespace SomeUsualShop.Infrastructure
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.Content.AppendHtml(GenerateLink());
-            foreach (Category item in _repository.Categories)
+            foreach (Category item in _categories.Categories)
             {
                 output.Content.AppendHtml(GenerateLink(item));
             }
@@ -47,7 +48,7 @@ namespace SomeUsualShop.Infrastructure
                 id= Int32.Parse(Context.HttpContext.Request.RouteValues["id"].ToString());
             }
             
-            tagBuilder.AddCssClass($"btn {(id==category.Id ? "btn-primary" : "btn-secondary")} btn-sm");
+            tagBuilder.AddCssClass($"btn {(id==category.Id ? "btn-primary" : "btn-outline-primary")} btn-sm");
             tagBuilder.MergeAttribute("href", $"/Home/Catalog/{category.Id}");
             
             var writer = new StringWriter();
@@ -61,7 +62,7 @@ namespace SomeUsualShop.Infrastructure
         {
             TagBuilder tagBuilder = new TagBuilder("a");
 
-            tagBuilder.AddCssClass("btn btn-secondary btn-sm");
+            tagBuilder.AddCssClass("btn btn-outline-primary btn-sm");
             tagBuilder.MergeAttribute("href", $"/Home/Catalog");
             
             var writer = new StringWriter();

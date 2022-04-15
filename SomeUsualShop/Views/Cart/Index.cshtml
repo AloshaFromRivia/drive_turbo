@@ -1,0 +1,65 @@
+﻿@model CartViewIndexModel
+
+@{
+    ViewBag.Title = "Корзина";
+    Layout = "_Layout";
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Кол-во</th>
+            <th>Товар</th>
+            <th class="text-right">Цена</th>
+            <th class="text-right">Итог</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (!Model.Cart.Items.Any())
+    {
+        <tr><td colspan="4" class="text-center"><h4>Корзина пустая</h4></td></tr>
+    }
+    else
+    {
+        @foreach (var line in Model.Cart.Items)
+        {
+            <tr>
+                <td class="text-center">@line.Count</td>
+                <td class="text-left">@line.Product.Name</td>
+                <td class="text-right">@line.Product.Price.ToString("c")</td>
+                <td class="text-right">
+                    @((line.Count * line.Product.Price).ToString("c"))
+                </td>
+                <td>
+                    <form asp-action="RemoveFromCart" method="post">
+                        <input type="hidden" name="Id"
+                               value="@line.Product.Id"/>
+                        <input type="hidden" name="returnUrl"
+                               value="@Model.ReturnUrl"/>
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Всего:</td>
+            <td class="text-right">
+                @Model.Cart.SubTotal().ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center mb-4">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Продолжить покупки</a>
+    <a class="btn btn-primary" href="#">
+        Оплатить
+    </a>
+</div>
+
+
