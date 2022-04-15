@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace SomeUsualShop
 {
@@ -20,6 +13,7 @@ namespace SomeUsualShop
         public static IWebHost BuildWebHost(string[] args) => 
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseKestrel()
                 .UseDefaultServiceProvider(options 
                     => options.ValidateScopes = false)
                 .Build();

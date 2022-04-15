@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 
 namespace SomeUsualShop.Models.Interfaces
 {
     public interface ICategoryRepository
     {
-        IEnumerable<Category> Categories { get;}
+        IQueryable<Category> Categories { get;}
         void AddCategory(Category category);
-        void RemoveCategory(Category category);
+        void RemoveCategory(long id);
     }
 }

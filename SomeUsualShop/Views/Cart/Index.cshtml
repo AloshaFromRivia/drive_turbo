@@ -24,8 +24,8 @@
         @foreach (var line in Model.Cart.Items)
         {
             <tr>
-                <td class="text-center">@line.Count</td>
                 <td class="text-left">@line.Product.Name</td>
+                <td class="text-center">@line.Count</td>
                 <td class="text-right">@line.Product.Price.ToString("c")</td>
                 <td class="text-right">
                     @((line.Count * line.Product.Price).ToString("c"))

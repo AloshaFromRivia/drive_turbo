@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using SomeUsualShop.Models;
 using SomeUsualShop.Models.Interfaces;
 
 namespace SomeUsualShop.Controllers
@@ -8,12 +7,10 @@ namespace SomeUsualShop.Controllers
     public class HomeController : Controller
     {
         private IProductRepository _products;
-        private ICategoryRepository _categories;
-        
-        public HomeController(IProductRepository products,ICategoryRepository categories)
+
+        public HomeController(IProductRepository products)
         {
             _products = products;
-            _categories = categories;
         }
 
         public IActionResult Index() => View();

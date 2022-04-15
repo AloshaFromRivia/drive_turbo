@@ -9,9 +9,10 @@ namespace SomeUsualShop.Models
         public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public Category Category { get; set; }
+        [ForeignKey("Category")]
         public long CategoryId { get; set; }
-       // public Category Category { get; set; }
         public decimal Price { get; set; }
-        public string ImagePath { get; set; }
+        public byte[] Image { get; set; }
     }
 }
