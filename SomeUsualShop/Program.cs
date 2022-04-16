@@ -13,7 +13,6 @@ namespace SomeUsualShop
         public static IWebHost BuildWebHost(string[] args) => 
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseKestrel()
                 .UseDefaultServiceProvider(options 
                     => options.ValidateScopes = false)
                 .Build();

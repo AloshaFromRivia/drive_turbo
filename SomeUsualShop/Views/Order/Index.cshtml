@@ -1,0 +1,30 @@
+﻿@model Order
+
+@{
+    ViewBag.Title = "Оформление заказа";
+    Layout = "_Layout";
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Index" method="post">
+    <h3>Оформление заказа</h3>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Line"></label>
+        <input asp-for="Line" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Zip"></label>
+        <input asp-for="Zip" class="form-control">
+    </div>
+     <div class="text-center my-2">
+            <input class="btn btn-primary" type="submit" value="Завершить заказ" />
+        </div>
+</form>

@@ -24,6 +24,7 @@ namespace SomeUsualShop
             
             services.AddTransient<IProductRepository,EfProductRepository>();
             services.AddTransient<ICategoryRepository, EfCategoryRepository>();
+            services.AddTransient<IOrderRepository, EfOrderRepository>();
             
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
