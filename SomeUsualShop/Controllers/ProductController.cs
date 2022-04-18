@@ -52,7 +52,7 @@ namespace SomeUsualShop.Controllers
         // GET: Product/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
 
@@ -73,7 +73,7 @@ namespace SomeUsualShop.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", productView.Product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name",productView.Product.CategoryId);
             return View(productView);
         }
 
@@ -93,7 +93,7 @@ namespace SomeUsualShop.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", productView.Product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", productView.Product.CategoryId);
             return View(productView);
         }
 
