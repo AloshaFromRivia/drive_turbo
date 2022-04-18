@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,22 @@ namespace SomeUsualShop
         {
             services.AddDbContext<ApplicationDbContext>(opts
                 => opts.UseSqlServer(Configuration["Data:DriveTurboProducts:ConnectionString"]));
+            services.AddDbContext<AppIdentityDbContext>(opts =>
+                opts.UseSqlServer(Configuration["Data:DriveTurboIdentity:ConnectionString"]));
+            
+            
+            services.AddIdentity<DriveTurboUser, IdentityRole>(options =>
+                {
+                    options.User.RequireUniqueEmail = true;
+                    options.Password.RequiredLength = 5;
+                    options.Password.RequireUppercase = false;  
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                } )
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
+            
             
             services.AddTransient<IProductRepository,EfProductRepository>();
             services.AddTransient<ICategoryRepository, EfCategoryRepository>();
@@ -37,12 +54,14 @@ namespace SomeUsualShop
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
+            app.UseAuthentication();
             //js, css files and etc...
             app.UseStaticFiles();
             app.UseSession();
             
             app.UseStatusCodePages();
             app.UseMvcWithDefaultRoute();
+            AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
         }
     }
 }

@@ -24,5 +24,7 @@ namespace SomeUsualShop.Models
         [DisplayName("Почтовый индекс")]
         [Required(ErrorMessage = "Почтовый индекс не должен быть пустым")]
         public string Zip { get; set; }
+        [DisplayName("Доставлено")]
+        public bool Delivered { get; set; }
     }
 }

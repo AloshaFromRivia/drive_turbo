@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using SomeUsualShop.Models.ViewModels;
 
 namespace SomeUsualShop.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -61,7 +63,6 @@ namespace SomeUsualShop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductViewModel productView)
         {
-            //TODO: Image convert
             if (ModelState.IsValid)
             {
                 if (productView.ImageFile!=null)

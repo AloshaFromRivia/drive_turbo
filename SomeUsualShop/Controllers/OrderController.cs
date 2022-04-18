@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using SomeUsualShop.Models.Interfaces;
 
 namespace SomeUsualShop.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,12 +26,14 @@ namespace SomeUsualShop.Controllers
         }
 
         // GET: Order
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Orders.ToListAsync());
         }
 
         // GET: Order/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -48,6 +52,7 @@ namespace SomeUsualShop.Controllers
         }
         
         // GET: Order/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -67,8 +72,9 @@ namespace SomeUsualShop.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,City,Line,Zip")] Order order)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,City,Line,Zip,Delivered")] Order order)
         {
             if (id != order.Id)
             {
@@ -99,6 +105,7 @@ namespace SomeUsualShop.Controllers
         }
 
         // GET: Order/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -117,6 +124,7 @@ namespace SomeUsualShop.Controllers
         }
 
         // POST: Order/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
@@ -148,7 +156,7 @@ namespace SomeUsualShop.Controllers
                 return View(order);
             }
         }
-        
+        [AllowAnonymous]
         public ViewResult Completed() {
             _cart.Clear();
             return View();

@@ -23,20 +23,20 @@
       <ul class="nav">
         <li class="nav-item"><a asp-controller="Cart" asp-action="Index" class="nav-link px-2"><i class="fa-solid fa-cart-shopping"></i> Корзина</a></li>
         @if (!User.Identity.IsAuthenticated)
-               {
-                 <li class="nav-item"><a asp-controller="Account" asp-action="Login" class="nav-link px-2"><i class="fa-solid fa-right-to-bracket"></i> Войти</a></li>
-                 <li class="nav-item"><a asp-controller="Account" asp-action="Registration" class="nav-link px-2"><i class="fa-solid fa-user"></i> Регистрация</a></li>
-               }
-               else
-               {
-                 <li class="nav-item"><a href="#" class="nav-link px-2">Добро пожаловать, @User.Identity.Name</a></li>
-                 <li class="nav-item"><a asp-controller="Account" asp-action="Logout" class="nav-link px-2"><i class="fa-solid fa-user"></i> Выйти</a></li>
-               }
+        {
+          <li class="nav-item"><a asp-controller="Account" asp-action="Login" class="nav-link px-2"><i class="fa-solid fa-right-to-bracket"></i> Войти</a></li>
+          <li class="nav-item"><a asp-controller="Account" asp-action="Registration" class="nav-link px-2"><i class="fa-solid fa-user"></i> Регистрация</a></li>
+        }
+        else
+        {
+          <li class="nav-item"><a href="#" class="nav-link px-2">Добро пожаловать, @User.Identity.Name</a></li>
+          <li class="nav-item"><a asp-controller="Account" asp-action="Logout" class="nav-link px-2"><i class="fa-solid fa-user"></i> Выйти</a></li>
+        }
       </ul>
     </div>
   </nav>
 </div>
-<nav class="navbar navbar-light border-bottom mb-4 py-2">
+<nav class="navbar navbar-light border-bottom py-2">
   <div class="container d-flex flex-wrap justify-content-center">
     <button class="navbar-toggler m-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -50,7 +50,15 @@
     </ul>
   </div>
 </nav>
-
+ <nav class="py-2 bg-light border-bottom">
+    <div class="container d-flex flex-wrap">
+      <ul class="nav me-auto">
+        <li class="nav-item"><a asp-controller="Product" asp-action="Index" class="nav-link px-2" aria-current="page">Продукты</a></li>
+        <li class="nav-item"><a asp-controller="Category" asp-action="Index" class="nav-link px-2">Категории</a></li>
+        <li class="nav-item"><a asp-controller="Order" asp-action="Index" class="nav-link px-2">Заказы</a></li>
+      </ul>
+    </div>
+  </nav>
 <div class="container">
   
   @* Display page content *@
