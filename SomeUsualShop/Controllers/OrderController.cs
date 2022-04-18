@@ -143,7 +143,7 @@ namespace SomeUsualShop.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrder(Order order)
+        public IActionResult CreateOrder(Order order)
         {
             if (!_cart.Items.Any()) {
                 ModelState.AddModelError("", "Ваша корзина пуста!");
