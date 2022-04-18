@@ -6,30 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SomeUsualShop.Models;
-using SomeUsualShop.Models.Interfaces;
 
 namespace SomeUsualShop.Controllers
 {
-    public class OrderController : Controller
+    public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IOrderRepository _repository;
-        private readonly Cart _cart;
 
-        public OrderController(ApplicationDbContext context,IOrderRepository repository,Cart cart)
+        public CategoryController(ApplicationDbContext context)
         {
             _context = context;
-            _repository = repository;
-            _cart = cart;
         }
 
-        // GET: Order
+        // GET: Category
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Orders.ToListAsync());
+            return View(await _context.Categories.ToListAsync());
         }
 
-        // GET: Order/Details/5
+        // GET: Category/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -37,17 +32,39 @@ namespace SomeUsualShop.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders
+            var category = await _context.Categories
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(order);
+            return View(category);
         }
-        
-        // GET: Order/Edit/5
+
+        // GET: Category/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Category/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(category);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(category);
+        }
+
+        // GET: Category/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -55,22 +72,22 @@ namespace SomeUsualShop.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
-            if (order == null)
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
-            return View(order);
+            return View(category);
         }
 
-        // POST: Order/Edit/5
+        // POST: Category/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,City,Line,Zip")] Order order)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Name")] Category category)
         {
-            if (id != order.Id)
+            if (id != category.Id)
             {
                 return NotFound();
             }
@@ -79,12 +96,12 @@ namespace SomeUsualShop.Controllers
             {
                 try
                 {
-                    _context.Update(order);
+                    _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderExists(order.Id))
+                    if (!CategoryExists(category.Id))
                     {
                         return NotFound();
                     }
@@ -95,10 +112,10 @@ namespace SomeUsualShop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(order);
+            return View(category);
         }
 
-        // GET: Order/Delete/5
+        // GET: Category/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -106,57 +123,30 @@ namespace SomeUsualShop.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders
+            var category = await _context.Categories
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(order);
+            return View(category);
         }
 
-        // POST: Order/Delete/5
+        // POST: Category/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var order = await _context.Orders.FindAsync(id);
-            _context.Orders.Remove(order);
+            var category = await _context.Categories.FindAsync(id);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
-        
-        //Allow Anonymous
-        public IActionResult CreateOrder()
-        {
-            return View(new Order());
-        }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateOrder(Order order)
+        private bool CategoryExists(long id)
         {
-            if (!_cart.Items.Any()) {
-                ModelState.AddModelError("", "Ваша корзина пуста!");
-            }
-            if (ModelState.IsValid) {
-                order.Items = _cart.Items.ToArray();
-                _repository.AddOrder(order);
-                return RedirectToAction(nameof(Completed));
-            } else {
-                return View(order);
-            }
-        }
-        
-        public ViewResult Completed() {
-            _cart.Clear();
-            return View();
-        }
-
-        private bool OrderExists(long id)
-        {
-            return _context.Orders.Any(e => e.Id == id);
+            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }

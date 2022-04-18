@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Views\Admin" />
+      <Folder Include="Views\Product" />
     </ItemGroup>
 
 </Project>

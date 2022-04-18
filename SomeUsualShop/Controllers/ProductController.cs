@@ -12,23 +12,23 @@ using SomeUsualShop.Models.ViewModels;
 
 namespace SomeUsualShop.Controllers
 {
-    public class AdminController : Controller
+    public class ProductController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AdminController(ApplicationDbContext context)
+        public ProductController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admin
+        // GET: Product
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Products.Include(p => p.Category);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Admin/Details/5
+        // GET: Product/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -47,14 +47,14 @@ namespace SomeUsualShop.Controllers
             return View(product);
         }
 
-        // GET: Admin/Create
+        // GET: Product/Create
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
             return View();
         }
 
-        // POST: Admin/Create
+        // POST: Product/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -76,7 +76,7 @@ namespace SomeUsualShop.Controllers
             return View(productView);
         }
 
-        // GET: Admin/Edit/5
+        // GET: Product/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -96,7 +96,7 @@ namespace SomeUsualShop.Controllers
             return View(productView);
         }
 
-        // POST: Admin/Edit/5
+        // POST: Product/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -136,7 +136,7 @@ namespace SomeUsualShop.Controllers
             return View(productView);
         }
         
-        // GET: Admin/Delete/5
+        // GET: Product/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -155,7 +155,7 @@ namespace SomeUsualShop.Controllers
             return View(product);
         }
 
-        // POST: Admin/Delete/5
+        // POST: Product/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
