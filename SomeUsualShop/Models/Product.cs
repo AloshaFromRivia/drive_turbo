@@ -21,6 +21,7 @@ namespace SomeUsualShop.Models
         [DisplayName("Цена")]
         public decimal Price { get; set; }
         [DisplayName("Изображение")]
+        [BindNever]
         public byte[] Image { get; set; }
     }
 }

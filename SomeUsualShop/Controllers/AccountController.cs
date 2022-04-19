@@ -32,11 +32,11 @@ namespace SomeUsualShop.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login([Bind("Password,Login,ReturnUrl")]LoginModel loginModel)
+        public async Task<IActionResult> Login([Bind("Password,Email,ReturnUrl")]LoginModel loginModel)
         {
             if (ModelState.IsValid)
             {
-                DriveTurboUser user = await _userManager.FindByNameAsync(loginModel.Login);
+                DriveTurboUser user = await _userManager.FindByEmailAsync(loginModel.Email);
                 if (user != null)
                 {
                     await _signInManager.SignOutAsync();

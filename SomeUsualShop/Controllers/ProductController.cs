@@ -65,7 +65,12 @@ namespace SomeUsualShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (productView.ImageFile!=null)
+                if (productView.ImageFile==null)
+                {
+                    ModelState.AddModelError("","Не выбрано изображение");
+                    return View(productView);
+                }
+                else
                 {
                     productView.Product.Image = ImageHelper.GetBytesFromImage(productView.ImageFile);
                 }
@@ -113,11 +118,17 @@ namespace SomeUsualShop.Controllers
             {
                 try
                 {
+                    var product = _context.Products.First(p => p.Id==id);
+                    
+                    product.Name = productView.Product.Name;
+                    product.Price = productView.Product.Price;
+                    product.Description = productView.Product.Description;
+                    product.CategoryId = productView.Product.CategoryId;
                     if (productView.ImageFile != null)
                     {
-                        productView.Product.Image = ImageHelper.GetBytesFromImage(productView.ImageFile);
+                        product.Image = ImageHelper.GetBytesFromImage(productView.ImageFile);
                     }
-                    _context.Update(productView.Product);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
