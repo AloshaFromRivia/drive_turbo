@@ -7,8 +7,7 @@
 
 <div class="text-danger" asp-validation-summary="All"></div>
 <div class="row">
-    <div class="col"></div>
-    <div class="form-signin col-4">
+    <div class="form-signin col-md-4 offset-md-4">
         <form asp-action="Login" method="post">
             <h1 class="h3 mb-3 fw-normal text-center">Вход</h1>
             <input type="hidden" asp-for="ReturnUrl"/>
@@ -22,8 +21,8 @@
             </div>
 
             <button class="w-100 btn btn-lg btn-primary my-1" type="submit">Войти</button>
+            <a asp-controller="Account" asp-action="Registration" class="nav-link">Регистрация</a>
         </form>
     </div>
-    <div class="col"></div>
 </div>
 

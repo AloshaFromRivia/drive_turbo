@@ -8,8 +8,8 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Кол-во</th>
             <th>Товар</th>
+            <th>Кол-во</th>
             <th class="text-right">Цена</th>
             <th class="text-right">Итог</th>
         </tr>
@@ -17,17 +17,17 @@
     <tbody>
     @if (!Model.Cart.Items.Any())
     {
-        <tr><td colspan="4" class="text-center"><h4>Корзина пустая</h4></td></tr>
+        <tr><td colspan="5" class="text-center"><h4>Корзина пустая</h4></td></tr>
     }
     else
     {
         @foreach (var line in Model.Cart.Items)
         {
             <tr>
-                <td class="text-left">@line.Product.Name</td>
-                <td class="text-center">@line.Count</td>
-                <td class="text-right">@line.Product.Price.ToString("c")</td>
-                <td class="text-right">
+                <td class="text-left align-middle">@line.Product.Name</td>
+                <td class="text-center align-middle">@line.Count</td>
+                <td class="text-right align-middle">@line.Product.Price.ToString("c")</td>
+                <td class="text-right align-middle">
                     @((line.Count * line.Product.Price).ToString("c"))
                 </td>
                 <td>
@@ -36,7 +36,7 @@
                                value="@line.Product.Id"/>
                         <input type="hidden" name="returnUrl"
                                value="@Model.ReturnUrl"/>
-                        <button type="submit" class="btn btn-sm btn-danger">
+                        <button type="submit" class="btn btn-sm btn-danger align-middle">
                             Удалить
                         </button>
                     </form>

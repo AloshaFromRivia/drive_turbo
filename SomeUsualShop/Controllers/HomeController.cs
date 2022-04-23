@@ -19,7 +19,9 @@ namespace SomeUsualShop.Controllers
         public ViewResult Reviews()=> View();
 
         [Route("/Home/Catalog/")]
-        public IActionResult Catalog() => View(_products.Products);
+        public IActionResult Catalog() => View(_products.Products
+            .OrderBy(p=>p.Category.Name)
+            .ThenBy(p=>p.Name));
         [Route("/Home/Catalog/{id}")]
         public IActionResult Catalog(int id) => View(_products.Products.Where(p => p.CategoryId == id));
         [HttpGet]

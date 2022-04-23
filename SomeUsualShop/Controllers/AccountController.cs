@@ -63,15 +63,15 @@ namespace SomeUsualShop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registration([Bind("Name,Password,Email,ReturnUrl")]RegistrationModel registrationModel)
         {
-            IdentityResult result=null;
-            DriveTurboUser user = new DriveTurboUser()
-            {
-                UserName = registrationModel.Name,
-                Email = registrationModel.Email
-            };
+            
             if (ModelState.IsValid)
             {
-                result = await _userManager.CreateAsync(user, registrationModel.Password);
+                DriveTurboUser user = new DriveTurboUser()
+                {
+                    UserName = registrationModel.Name,
+                    Email = registrationModel.Email
+                };
+                IdentityResult result = await _userManager.CreateAsync(user, registrationModel.Password);
                 await _userManager.AddToRoleAsync(user,"User");
                 if (result.Succeeded)
                 {
@@ -81,8 +81,8 @@ namespace SomeUsualShop.Controllers
                         return Redirect(registrationModel.ReturnUrl ?? "/Home");
                     }
                 }
+                AddErrorsFromResult(result);
             }
-            AddErrorsFromResult(result);
             return View(registrationModel);
         }
 

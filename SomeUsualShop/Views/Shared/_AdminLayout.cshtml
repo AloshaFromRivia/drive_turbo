@@ -46,7 +46,7 @@
       <span class="fs-4"><span class="text-danger">Drive</span>Turbo</span>
     </a>
     <ul class="nav">
-      <li class="nav-item"><a class="nav-link link-dark px-2">+7(999)-999-99-99</a></li>
+      <li class="nav-item"><a class="nav-link link-dark px-2"><i class="fa-solid fa-phone"></i> +7(999)-999-99-99</a></li>
     </ul>
   </div>
 </nav>
@@ -59,22 +59,58 @@
       </ul>
     </div>
   </nav>
-<div class="container">
+<div class="container d-flex flex-column min-vh-100">
   
   @* Display page content *@
   @RenderBody()
 
   @* Footer *@
-  <footer class="d-flex flex-wrap justify-content-between align-items-end py-3 mt-auto mb-0 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-      <span class="text-muted">© 2022 Григорий Иванов, П-18-1</span>
-    </div>
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-      <li class="ms-3"><a class="text-muted" href="#"><img src="/img/vk-icon.svg" width="24" height="24"/></a></li>
-      <li class="ms-3"><a class="text-muted" href="#"><img src="/img/youtube-icon.svg" width="24" height="24"></a></li>
-      <li class="ms-3"><a class="text-muted" href="#"><img src="/img/ok-icon.svg" width="24" height="24"></a></li>
-    </ul>
-  </footer>
+  <footer class="footer py-5 mt-auto border-top">
+      <div class="row">
+       
+        <div class="col-2">
+          <h5>Контакты</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">ВКонтакте</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">YouTube</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Insagram</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-2">
+          <h5>Карта сайта</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a asp-controller="Home" asp-action="Index" class="nav-link p-0 text-muted">Главная</a></li>
+            <li class="nav-item mb-2"><a asp-controller="Home" asp-action="Catalog" class="nav-link p-0 text-muted">Каталог</a></li>
+            <li class="nav-item mb-2"><a asp-controller="Home" asp-action="About" class="nav-link p-0 text-muted">О Нас</a></li>
+            <li class="nav-item mb-2"><a asp-controller="Home" asp-action="Reviews" class="nav-link p-0 text-muted">Отзывы</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-4 offset-1">
+          <form>
+            <h5>Подпишитесь на новостную рассылку</h5>
+            <p>Будьте в курсе о всех акциях нашего магазина</p>
+            <div class="d-flex w-100 gap-2">
+              <label for="newsletter1" class="visually-hidden">Адрес e-mail</label>
+              <input id="newsletter1" type="text" class="form-control" placeholder="Email адрес">
+              <button class="btn btn-primary" type="button">Подписаться</button>
+            </div>
+          </form>
+        </div>
+      </div>
+  
+      <div class="d-flex justify-content-between py-4 my-4 border-top">
+        <p>© 2022 Иванов Григорий П-18-1, Все права защищены</p>
+        <ul class="list-unstyled d-flex">
+          <li class="ms-3"><a class="link-dark" href="#"><i class="fa-brands fa-vk"></i></a></li>
+          <li class="ms-3"><a class="link-dark" href="#"><i class="fa-brands fa-instagram"></i></a></li>
+          <li class="ms-3"><a class="link-dark" href="#"><i class="fa-brands fa-youtube"></i></a></li>
+        </ul>
+      </div>
+    </footer>
 </div>
 @* Bootstrap js *@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

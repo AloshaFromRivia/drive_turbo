@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 
 namespace SomeUsualShop.Infrastructure
@@ -21,6 +22,16 @@ namespace SomeUsualShop.Infrastructure
             }
 
             return fileBytes;
+        }
+
+        public static string GetPathByByteArray(byte[] img)
+        {
+            if (img !=null)
+            {
+                return "data:image;base64,"+Convert.ToBase64String(img);
+            }
+
+            return "/img/noimage.png";
         }
     }
 }

@@ -3,6 +3,24 @@
     Layout = "_Layout";
 }
 
+<h2 class="text-center"></h2>
+
+<div class="card mb-3">
+  <img src="/img/discount.jpg" class="card-img-top" alt="...">
+  <div class="card-img-overlay">
+    <h1 class="card-title text-white"><span class="text-danger">Drive</span>Turbo</h1>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Акция!</h5>
+    <p class="card-text">Заполните форму и мы отправим Вам подробную информацию об акции</p>
+    <form class="d-flex">
+      <input class="form-control" type="email" placeholder="example@gmail.com">
+      <button class="btn btn-success" type="submit">Отправить</button>
+    </form>
+    <p class="card-text"><small class="text-muted">Действует до 11.07.2022</small></p>
+  </div>
+</div>
+
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -29,3 +47,26 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
+
+<div class="row my-2">
+  <div class="card col">
+    <div class="card-body">
+      <h5 class="card-title">Акции</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Напиши отзыв - Получи деньги или скидку</h6>
+      <p class="card-text">DriveTurbo дарит подарки за отзыв!
+        Ваше мнение очень важно для нас, а ваш опыт поможет определиться с выбором другим пользователям.</p>
+      <a asp-controller="Home" asp-action="Catalog" class="card-link">Все акции</a>
+    </div>
+  </div>
+  
+   <div class="card col">
+      <div class="card-body">
+        <h5 class="card-title">Новости</h5>
+        <h6 class="card-subtitle mb-2 text-muted">22 апреля 2022</h6>
+        <p class="card-text">График работы в праздничные дни</p>
+        <a asp-controller="Home" asp-action="About" class="card-link">Посмотреть</a>
+      </div>
+    </div>
+</div>
+

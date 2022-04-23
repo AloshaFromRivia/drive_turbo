@@ -26,7 +26,10 @@ namespace SomeUsualShop.Controllers
         // GET: Product
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Products.Include(p => p.Category);
+            var applicationDbContext = _context.Products
+                .Include(p => p.Category)
+                .OrderBy(p=>p.Category.Name)
+                .ThenBy(p=>p.Name);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -68,6 +71,7 @@ namespace SomeUsualShop.Controllers
                 if (productView.ImageFile==null)
                 {
                     ModelState.AddModelError("","Не выбрано изображение");
+                    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name",productView.Product.CategoryId);
                     return View(productView);
                 }
                 else
