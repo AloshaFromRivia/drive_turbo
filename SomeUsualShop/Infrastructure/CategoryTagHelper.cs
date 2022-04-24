@@ -43,7 +43,7 @@ namespace SomeUsualShop.Infrastructure
                 id= Int32.Parse(Context.HttpContext.Request.RouteValues["id"].ToString());
             }
             
-            tagBuilder.AddCssClass($"btn {(id==category.Id ? "btn-primary" : "btn-outline-primary")} btn-sm");
+            tagBuilder.AddCssClass($"btn {(id==category.Id ? "btn-primary" : "btn-outline-primary")} btn-sm col-md-2 py-1");
             tagBuilder.MergeAttribute("href", $"/Home/Catalog/{category.Id}");
             
             var writer = new StringWriter();
@@ -57,7 +57,7 @@ namespace SomeUsualShop.Infrastructure
         {
             TagBuilder tagBuilder = new TagBuilder("a");
 
-            tagBuilder.AddCssClass("btn btn-outline-primary btn-sm");
+            tagBuilder.AddCssClass("btn btn-outline-primary btn-sm col-md-2 py-1");
             tagBuilder.MergeAttribute("href", $"/Home/Catalog");
             
             var writer = new StringWriter();

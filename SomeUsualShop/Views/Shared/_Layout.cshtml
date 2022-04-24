@@ -43,7 +43,9 @@
   </nav>
 </div>
 <nav class="navbar navbar-light bg-light border-bottom mb-4 py-2" style="background: rgb(58,110,165);
-                                                                         background: linear-gradient(90deg, rgba(58,110,165,1) 0%, rgba(0,78,152,1) 25%, rgba(192,192,192,1) 50%, rgba(235,235,235,1) 75%, rgba(255,103,0,1) 100%);">
+                                                                         background: linear-gradient(90deg, rgba(58,110,165,1) 0%, 
+                                                                         rgba(0,78,152,1) 25%, rgba(192,192,192,1) 50%, 
+                                                                         rgba(235,235,235,1) 75%, rgba(255,103,0,1) 100%);">
   <div class="container d-flex flex-wrap justify-content-center">
     <button class="navbar-toggler m-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -65,34 +67,35 @@
       @RenderBody()
   </div>
   @* Footer *@
-  <footer class="footer mt-auto py-3 border-top" style="background-color: white">
-    <div class="row">
-      <div class="col-2"></div>
-           
-      <div class="col-2">
-        <h5>Контакты</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">ВКонтакте</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">YouTube</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Insagram</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-        </ul>
-      </div>
-     
-      <div class="col-2">
-        <h5>Карта сайта</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a asp-controller="Home" asp-action="Index" class="nav-link p-0 text-muted">Главная</a></li>
-          <li class="nav-item mb-2"><a asp-controller="Home" asp-action="Catalog" class="nav-link p-0 text-muted">Каталог</a></li>
-          <li class="nav-item mb-2"><a asp-controller="Home" asp-action="About" class="nav-link p-0 text-muted">О Нас</a></li>
-          <li class="nav-item mb-2"><a asp-controller="Home" asp-action="Reviews" class="nav-link p-0 text-muted">Отзывы</a></li>
-        </ul>
-      </div>
-     
-      <div class="col-4 offset-1">
-        <form>
-          <h5>Подпишитесь на новостную рассылку</h5>
+  <footer class="footer mt-auto py-3 border-top" style="background-color: white;">
+    <div class="container">
+      <div class="row">
+      
+        <div class="col-4 col-md-4">
+          <h5>Контакты</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">ВКонтакте</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">YouTube</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Insagram</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+          </ul>
+        </div>
+      
+        <div class="col-4 col-md-4">
+          <h5>Карта сайта</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a asp-controller="Home" asp-action="Index" class="nav-link p-0 text-muted">Главная</a></li>
+            <li class="nav-item mb-2"><a asp-controller="Home" asp-action="Catalog" class="nav-link p-0 text-muted">Каталог</a></li>
+            <li class="nav-item mb-2"><a asp-controller="Home" asp-action="About" class="nav-link p-0 text-muted">О Нас</a></li>
+            <li class="nav-item mb-2"><a asp-controller="Home" asp-action="Reviews" class="nav-link p-0 text-muted">Отзывы</a></li>
+          </ul>
+        </div>
+      
+        <div class="col-4 col-md-4">
+          <h5>Рассылка</h5>
           <p>Будьте в курсе о всех акциях нашего магазина</p>
+        </div>
+        <form>
           <div class="d-flex w-100 gap-2">
             <label for="newsletter1" class="visually-hidden">Адрес e-mail</label>
             <input id="newsletter1" type="text" class="form-control" placeholder="Email адрес">
@@ -101,7 +104,8 @@
         </form>
       </div>
     </div>
-     
+
+
     <div class="d-flex justify-content-between pt-4 my-4 border-top">
       <p>© 2022 Иванов Григорий П-18-1, Все права защищены</p>
       <ul class="list-unstyled d-flex">
