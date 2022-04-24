@@ -2,10 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.16" />
+      <PackageReference Include="Microsoft.AspNetCore.Server.IIS" Version="2.2.6" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.16" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.16" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.16">
@@ -19,4 +21,15 @@
       <Folder Include="Views\Product" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="web.config">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </None>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
+    </PropertyGroup>
 </Project>

@@ -13,6 +13,7 @@ namespace SomeUsualShop
         public static IWebHost BuildWebHost(string[] args) => 
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseIISIntegration()
                 .UseDefaultServiceProvider(options 
                     => options.ValidateScopes = false)
                 .Build();

@@ -24,7 +24,7 @@ namespace SomeUsualShop
                 => opts.UseSqlServer(Configuration["Data:DriveTurboProducts:ConnectionString"]));
             services.AddDbContext<AppIdentityDbContext>(opts =>
                 opts.UseSqlServer(Configuration["Data:DriveTurboIdentity:ConnectionString"]));
-            
+                
             
             services.AddIdentity<DriveTurboUser, IdentityRole>(options =>
                 {
